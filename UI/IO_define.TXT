@@ -1,0 +1,53 @@
+"""
+config struct
+#define MAX_PUMP_NUM  8£»
+#define MAX_WASH_TYPE_NUM  20£»
+#define MAX_DEV_NUM  4£»
+
+typedef struct
+{
+	uint8_t delay_s;     # 1 B
+	uint16_t volume_ml;  # 2 B   
+}wash_type_dev_t;
+
+typedef struct
+{
+	wash_type_dev_t pump[MAX_PUMP_NUM];
+}wash_type_info_t;
+
+typedef struct
+{
+	wash_type_info_t type[MAX_WASH_TYPE_NUM];
+}wash_standard_type_t;
+
+typedef struct
+{
+	wash_standard_type_t dev[MAX_DEV_NUM];
+}wash_standard_t;
+
+
+one pump include 3 B information,       len = 3 B
+
+one program include 8 pump ,            len = 8 X 3 = 24
+
+one washer include 20 program,          len = 20 X 24 = 480
+
+the whole config file include 4 washer, len = 4 X 480 = 1920
+
+total len : 
+
+
+for python:
+1. first read 480 B,  read 4 times
+read_washer
+write_washer
+
+2. second, on the 480B, read 24 B, read 20 times
+read_program
+write_program
+
+3. third, on the 24 B, read 3 B, read 8 times
+read_pump
+write_pump
+
+"""

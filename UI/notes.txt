@@ -1,0 +1,1 @@
+2014.08.12:  NetworkThread.py  move UI operation from NetworkThread.py to main thread(LaundryFrame.py)
